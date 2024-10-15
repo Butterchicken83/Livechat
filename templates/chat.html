@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+      }
+      .chat-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+      }
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        border: 2px solid green;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #222;
+      }
+      .message-input {
+        display: flex;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: 2px solid green;
+        background-color: #333;
+        color: white;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px;
+        background-color: green;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: darkgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="messages" id="messages"></div>
+      <div class="message-input">
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Type your message here..."
+        />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script>
+      const username = "{{ username }}";
+      const messagesContainer = document.getElementById("messages");
+
+      function sendMessage() {
+        const messageInput = document.getElementById("messageInput");
+        const message = messageInput.value;
+
+        if (message.trim() !== "") {
+          const msgElement = document.createElement("div");
+          msgElement.textContent = username + ": " + message;
+          messagesContainer.appendChild(msgElement);
+          messageInput.value = ""; // Clear the input field
+        }
+      }
+    </script>
+  </body>
+</html>
